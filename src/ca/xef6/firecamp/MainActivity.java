@@ -11,14 +11,71 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
 
 public class MainActivity extends FragmentActivity implements TabListener {
 
     static final int TAB_COUNT = 4;
 
     final Class<?> tabFragments[] = new Class<?>[TAB_COUNT];
+
+    // -------------------------------------------------------------------------
+    private static final String TAG = "MainActivity";
+
+    private Session.StatusCallback callback = new Session.StatusCallback() {
+	@Override
+	public void call(Session session, SessionState state, Exception exception) {
+	    onSessionStateChange(session, state, exception);
+	}
+    };
+
+    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+	if (state.isOpened()) {
+	    Log.i(TAG, "Logged in...");
+	} else if (state.isClosed()) {
+	    Log.i(TAG, "Logged out...");
+	}
+    }
+
+    private UiLifecycleHelper uiHelper;
+
+    @Override
+    public void onResume() {
+	super.onResume();
+	uiHelper.onResume();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	super.onActivityResult(requestCode, resultCode, data);
+	uiHelper.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onPause() {
+	super.onPause();
+	uiHelper.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+	super.onDestroy();
+	uiHelper.onDestroy();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+	super.onSaveInstanceState(outState);
+	uiHelper.onSaveInstanceState(outState);
+    }
+
+    // -------------------------------------------------------------------------
 
     private final int tabCaptionIds[] = new int[TAB_COUNT];
 
@@ -86,7 +143,8 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	    }
 
 	});
-
+	uiHelper = new UiLifecycleHelper(this, callback);
+	uiHelper.onCreate(bundle);
     }
 
     private void addTab(ActionBar actionBar, int captionId) {
@@ -110,7 +168,7 @@ public class MainActivity extends FragmentActivity implements TabListener {
 	tabFragments[index] = ca.xef6.firecamp.people.PeopleFragmentEx.class;
 	tabCaptionIds[index] = R.string.tab_people;
 	++index;
-	tabFragments[index] = ca.xef6.firecamp.profile.ProfilePictureSampleFragment.class;
+	tabFragments[index] = ca.xef6.firecamp.profile.ProfileFragment.class;
 	tabCaptionIds[index] = R.string.tab_profile;
     }
 

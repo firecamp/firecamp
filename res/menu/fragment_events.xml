@@ -3,8 +3,9 @@
 
     <item
         android:id="@+id/insert"
+        android:icon="@android:drawable/ic_menu_add"
         android:showAsAction="always"
-        android:title="Insert">
+        android:title="@string/action_create">
     </item>
 
 </menu>
