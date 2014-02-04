@@ -8,5 +8,28 @@
     <string name="fragment_map">Map</string>
     <string name="fragment_people">People</string>
     <string name="fragment_profile">Profile</string>
-<string name="app_id">380615018626574</string>
+    <string name="app_id">380615018626574</string>
+    <string name="action_search">Search</string>
+    <string name="tab_map">Map</string>
+    <string name="tab_people">People</string>
+    <string name="tab_events">Events</string>
+    <string name="tab_profile">Profile</string>
+    <string name="cd_image_view_splash">Splash image.</string>
+    <string name="action_create">Create</string>
+    <string name="action_delete">Delete</string>
+    <string name="hello">Hello World, Todo!</string>
+    <string name="no_todos">Currently there are no events.</string>
+    <string name="menu_insert">Add Item</string>
+    <string name="menu_delete">Delete Todo</string>
+    <string name="todo_summary">Summary</string>
+    <string name="todo_description">Delete Todo</string>
+    <string name="todo_edit_summary">Summary</string>
+    <string name="todo_edit_description">Description</string>
+    <string name="todo_edit_confirm">Confirm</string>
+
+    <string-array name="priorities">
+        <item>Urgent</item>
+        <item>Reminder</item>
+    </string-array>
+
 </resources>

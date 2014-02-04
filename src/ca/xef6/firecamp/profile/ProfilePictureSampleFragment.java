@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package ca.xef6.firecamp;
+package ca.xef6.firecamp.profile;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,6 +22,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import ca.xef6.firecamp.R;
+import ca.xef6.firecamp.R.id;
+import ca.xef6.firecamp.R.layout;
+
 import com.facebook.widget.ProfilePictureView;
 
 import java.util.Date;

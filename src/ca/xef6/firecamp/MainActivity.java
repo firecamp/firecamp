@@ -2,85 +2,144 @@ package ca.xef6.firecamp;
 
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
+import android.app.ActionBar.TabListener;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
- 
-public class MainActivity extends FragmentActivity implements ActionBar.TabListener {
-	
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return super.onCreateOptionsMenu(menu);
+
+public class MainActivity extends FragmentActivity implements TabListener {
+
+    static final int TAB_COUNT = 4;
+
+    final Class<?> tabFragments[] = new Class<?>[TAB_COUNT];
+
+    private final int tabCaptionIds[] = new int[TAB_COUNT];
+
+    private int currentTabPosition;
+    private ViewPager viewPager;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+	getMenuInflater().inflate(R.menu.activity_main, menu);
+	return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+	switch (menuItem.getItemId()) {
+	case R.id.action_settings:
+	    startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+	    break;
+	default:
+	    return false;
 	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.action_settings:
-			startActivity(new Intent(MainActivity.this, SettingsActivity.class));
-			break;
-		default:
-			return super.onOptionsItemSelected(item);
-		}
-		return true;
+	return true;
+    }
+
+    @Override
+    public void onTabReselected(Tab tab, FragmentTransaction fragmentTransaction) {
+    }
+
+    @Override
+    public void onTabSelected(Tab tab, FragmentTransaction fragmentTransaction) {
+	currentTabPosition = tab.getPosition();
+	viewPager.setCurrentItem(currentTabPosition);
+    }
+
+    @Override
+    public void onTabUnselected(Tab tab, FragmentTransaction fragmentTransaction) {
+    }
+
+    @Override
+    protected void onCreate(Bundle bundle) {
+	super.onCreate(bundle);
+	initializeTabOrder();
+	setContentView(R.layout.activity_main);
+	viewPager = (ViewPager) findViewById(R.id.view_pager);
+	viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), this));
+	final ActionBar actionBar = getActionBar();
+	actionBar.setDisplayShowTitleEnabled(false);
+	actionBar.setDisplayUseLogoEnabled(true);
+	actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+	addTabs(actionBar);
+	viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+	    @Override
+	    public void onPageSelected(int position) {
+		currentTabPosition = position;
+		actionBar.setSelectedNavigationItem(position);
+	    }
+
+	    @Override
+	    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+	    }
+
+	    @Override
+	    public void onPageScrollStateChanged(int state) {
+	    }
+
+	});
+
+    }
+
+    private void addTab(ActionBar actionBar, int captionId) {
+	actionBar.addTab(actionBar.newTab().setText(getResources().getString(captionId)).setTabListener(this));
+    }
+
+    private void addTabs(ActionBar actionBar) {
+	for (int captionId : tabCaptionIds) {
+	    addTab(actionBar, captionId);
 	}
-	
-	@Override
-	public void onTabReselected(Tab tab, FragmentTransaction transaction) {
+    }
+
+    private void initializeTabOrder() {
+	int index = 0;
+	tabFragments[index] = ca.xef6.firecamp.map.MapFragment.class;
+	tabCaptionIds[index] = R.string.tab_map;
+	++index;
+	tabFragments[index] = ca.xef6.firecamp.events.EventsFragment.class;
+	tabCaptionIds[index] = R.string.tab_events;
+	++index;
+	tabFragments[index] = ca.xef6.firecamp.people.PeopleFragmentEx.class;
+	tabCaptionIds[index] = R.string.tab_people;
+	++index;
+	tabFragments[index] = ca.xef6.firecamp.profile.ProfilePictureSampleFragment.class;
+	tabCaptionIds[index] = R.string.tab_profile;
+    }
+
+}
+
+class ViewPagerAdapter extends FragmentStatePagerAdapter {
+
+    private final MainActivity mainActivity;
+
+    public ViewPagerAdapter(FragmentManager fragmentManager, MainActivity mainActivity) {
+	super(fragmentManager);
+	this.mainActivity = mainActivity;
+    }
+
+    @Override
+    public Fragment getItem(int index) {
+	Fragment fragment = null;
+	try {
+	    fragment = (Fragment) mainActivity.tabFragments[index].newInstance();
+	} catch (ArrayIndexOutOfBoundsException exception) {
+	} catch (IllegalAccessException exception) {
+	} catch (InstantiationException exception) {
 	}
-	
-	@Override
-	public void onTabSelected(Tab tab, FragmentTransaction transaction) {
-		viewPager_.setCurrentItem(tab.getPosition());
-	}
-	
-	@Override
-	public void onTabUnselected(Tab tab, FragmentTransaction transaction) {
-	}
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-		viewPager_ = (ViewPager) findViewById(R.id.pager);
-		viewPager_.setAdapter(new TabsPagerAdapter(getSupportFragmentManager()));
-		final ActionBar actionBar = getActionBar();
-		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setDisplayUseLogoEnabled(true);
-		addTabs(actionBar);
-        viewPager_.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-        	 
-            @Override
-            public void onPageSelected(int position) {
-                actionBar.setSelectedNavigationItem(position);
-            }
- 
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-            }
- 
-            @Override
-            public void onPageScrollStateChanged(int arg0) {
-            }
-        });
-	}
-	
-	private void addTab(ActionBar actionBar, int labelId) {
-		actionBar.addTab(actionBar.newTab().setText(getResources().getString(labelId)).setTabListener(this));
-	}
-	
-	private void addTabs(ActionBar actionBar) {
-		addTab(actionBar, R.string.fragment_map);
-		addTab(actionBar, R.string.fragment_events);
-		addTab(actionBar, R.string.fragment_people);
-		addTab(actionBar, R.string.fragment_profile);
-	}
-	
-	private ViewPager viewPager_;
+	return fragment;
+    }
+
+    @Override
+    public int getCount() {
+	return MainActivity.TAB_COUNT;
+    }
+
 }

@@ -1,5 +1,8 @@
-package ca.xef6.firecamp;
+package ca.xef6.firecamp.profile;
 
+import ca.xef6.firecamp.R;
+import ca.xef6.firecamp.R.layout;
+import ca.xef6.firecamp.R.menu;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;

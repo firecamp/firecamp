@@ -1,7 +1,5 @@
-package ca.xef6.firecamp;
+package ca.xef6.firecamp.people;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,7 +20,9 @@ import android.widget.SearchView;
 import android.widget.SearchView.OnCloseListener;
 import android.widget.SearchView.OnQueryTextListener;
 
-public class PeopleFragment extends ListFragment implements OnQueryTextListener, OnCloseListener, LoaderManager.LoaderCallbacks<Cursor> {
+public class PeopleFragmentEx extends ListFragment implements
+		OnQueryTextListener, OnCloseListener,
+		LoaderManager.LoaderCallbacks<Cursor> {
 
 	// This is the Adapter being used to display the list's data.
 	SimpleCursorAdapter mAdapter;
@@ -45,8 +45,10 @@ public class PeopleFragment extends ListFragment implements OnQueryTextListener,
 		setHasOptionsMenu(true);
 
 		// Create an empty adapter we will use to display the loaded data.
-		mAdapter = new SimpleCursorAdapter(getActivity(), android.R.layout.simple_list_item_2, null, new String[] { Contacts.DISPLAY_NAME,
-				Contacts.CONTACT_STATUS }, new int[] { android.R.id.text1, android.R.id.text2 }, 0);
+		mAdapter = new SimpleCursorAdapter(getActivity(),
+				android.R.layout.simple_list_item_2, null, new String[] {
+						Contacts.DISPLAY_NAME, Contacts.CONTACT_STATUS },
+				new int[] { android.R.id.text1, android.R.id.text2 }, 0);
 		setListAdapter(mAdapter);
 
 		// Start out with a progress indicator.
@@ -57,28 +59,27 @@ public class PeopleFragment extends ListFragment implements OnQueryTextListener,
 		getLoaderManager().initLoader(0, null, this);
 	}
 
-	public static class MySearchView extends SearchView {
-		public MySearchView(Context context) {
-			super(context);
-		}
-
-		// The normal SearchView doesn't clear its search text when
-		// collapsed, so we will do this for it.
-		@SuppressLint("NewApi")
-		@Override
-		public void onActionViewCollapsed() {
-			setQuery("", false);
-			super.onActionViewCollapsed();
-		}
-	}
+	/*
+	 * public static class MySearchView extends SearchView { public
+	 * MySearchView(Context context) { super(context); }
+	 * 
+	 * // The normal SearchView doesn't clear its search text when // collapsed,
+	 * so we will do this for it.
+	 * 
+	 * @SuppressLint("NewApi")
+	 * 
+	 * @Override public void onActionViewCollapsed() { setQuery("", false);
+	 * super.onActionViewCollapsed(); } }
+	 */
 
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		// Place an action bar item for searching.
 		MenuItem item = menu.add("Search");
 		item.setIcon(android.R.drawable.ic_menu_search);
-		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
-		mSearchView = new MySearchView(getActivity());
+		item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM
+				| MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
+		mSearchView = new SearchView(getActivity());
 		mSearchView.setOnQueryTextListener(this);
 		mSearchView.setOnCloseListener(this);
 		mSearchView.setIconifiedByDefault(true);
@@ -111,10 +112,10 @@ public class PeopleFragment extends ListFragment implements OnQueryTextListener,
 
 	@Override
 	public boolean onClose() {
-		if (!TextUtils.isEmpty(mSearchView.getQuery())) {
-			mSearchView.setQuery(null, true);
-		}
-		return true;
+		// if (!TextUtils.isEmpty(mSearchView.getQuery())) {
+		// mSearchView.setQuery(null, true);
+		// }
+		return false;
 	}
 
 	@Override
@@ -124,8 +125,9 @@ public class PeopleFragment extends ListFragment implements OnQueryTextListener,
 	}
 
 	// These are the Contacts rows that we will retrieve.
-	static final String[] CONTACTS_SUMMARY_PROJECTION = new String[] { Contacts._ID, Contacts.DISPLAY_NAME, Contacts.CONTACT_STATUS, Contacts.CONTACT_PRESENCE,
-			Contacts.PHOTO_ID, Contacts.LOOKUP_KEY, };
+	static final String[] CONTACTS_SUMMARY_PROJECTION = new String[] {
+			Contacts._ID, Contacts.DISPLAY_NAME, Contacts.CONTACT_STATUS,
+			Contacts.CONTACT_PRESENCE, Contacts.PHOTO_ID, Contacts.LOOKUP_KEY, };
 
 	public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 		// This is called when a new Loader needs to be created. This
@@ -134,15 +136,20 @@ public class PeopleFragment extends ListFragment implements OnQueryTextListener,
 		// currently filtering.
 		Uri baseUri;
 		if (mCurFilter != null) {
-			baseUri = Uri.withAppendedPath(Contacts.CONTENT_FILTER_URI, Uri.encode(mCurFilter));
+			baseUri = Uri.withAppendedPath(Contacts.CONTENT_FILTER_URI,
+					Uri.encode(mCurFilter));
 		} else {
 			baseUri = Contacts.CONTENT_URI;
 		}
 
 		// Now create and return a CursorLoader that will take care of
 		// creating a Cursor for the data being displayed.
-		String select = "((" + Contacts.DISPLAY_NAME + " NOTNULL) AND (" + Contacts.HAS_PHONE_NUMBER + "=1) AND (" + Contacts.DISPLAY_NAME + " != '' ))";
-		return new CursorLoader(getActivity(), baseUri, CONTACTS_SUMMARY_PROJECTION, select, null, Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
+		String select = "((" + Contacts.DISPLAY_NAME + " NOTNULL) AND ("
+				+ Contacts.HAS_PHONE_NUMBER + "=1) AND ("
+				+ Contacts.DISPLAY_NAME + " != '' ))";
+		return new CursorLoader(getActivity(), baseUri,
+				CONTACTS_SUMMARY_PROJECTION, select, null,
+				Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
 	}
 
 	public void onLoadFinished(Loader<Cursor> loader, Cursor data) {

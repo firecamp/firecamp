@@ -1,5 +1,8 @@
-package ca.xef6.firecamp;
+package ca.xef6.firecamp.map;
 
+import ca.xef6.firecamp.R;
+import ca.xef6.firecamp.R.layout;
+import ca.xef6.firecamp.R.menu;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,17 +12,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class EventsFragment extends Fragment
+public class MapFragment extends Fragment
 {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		inflater.inflate(R.menu.fragment_events, menu);
+		inflater.inflate(R.menu.fragment_map, menu);
 	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_events, container, false);
+		return inflater.inflate(R.layout.fragment_map, container, false);
 	}
 	
 	@Override
