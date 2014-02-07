@@ -159,13 +159,13 @@ public class MainActivity extends FragmentActivity implements TabListener {
 
     private void initializeTabOrder() {
 	int index = 0;
-	tabFragments[index] = ca.xef6.firecamp.map.MapFragment.class;
+	tabFragments[index] = com.google.android.gms.maps.SupportMapFragment.class;
 	tabCaptionIds[index] = R.string.tab_map;
 	++index;
 	tabFragments[index] = ca.xef6.firecamp.events.EventsFragment.class;
 	tabCaptionIds[index] = R.string.tab_events;
 	++index;
-	tabFragments[index] = ca.xef6.firecamp.people.PeopleFragmentEx.class;
+	tabFragments[index] = ca.xef6.firecamp.people.PeopleFragment.class;
 	tabCaptionIds[index] = R.string.tab_people;
 	++index;
 	tabFragments[index] = ca.xef6.firecamp.profile.ProfileFragment.class;
