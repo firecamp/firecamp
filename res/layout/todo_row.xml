@@ -1,26 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content" >
-
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="30dp"
-        android:layout_height="24dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <ImageButton
+        android:id="@+id/ImageButton_Party_Poster1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/partyposter"
+        android:scaleType="fitXY"
+        android:background="#99D9EA"
         android:layout_marginLeft="4dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        android:src="@android:drawable/ic_menu_add" >
-    </ImageView>
+        android:layout_marginRight="4dp"/>
 
     <TextView
         android:id="@+id/label"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:lines="1"
-        android:text="@+id/TextView01"
-        android:textSize="24dp" >
-    </TextView>
-
-</LinearLayout>
+        android:text="@+id/TextView01" />
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:weightSum="2"
+        android:orientation="horizontal">
+        <ImageButton 
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:src="@drawable/like"
+            android:scaleType="centerInside"
+            />
+        <ImageButton 
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:src="@drawable/share"
+            android:scaleType="centerInside"/>
+    </LinearLayout>
+    
+    </LinearLayout>
