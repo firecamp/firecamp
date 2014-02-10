@@ -37,6 +37,7 @@
         <activity
             android:name=".SplashActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,6 +47,11 @@
         <activity
             android:name=".MainActivity"
             android:logo="@drawable/ic_logo" >
+                        
+        </activity>
+                <activity
+            android:name=".events.EventCreateActivity">
+
         </activity>
         <activity
             android:name=".SettingsActivity"

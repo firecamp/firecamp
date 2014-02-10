@@ -2,10 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/insert"
+        android:id="@+id/action_create"
         android:icon="@android:drawable/ic_menu_add"
-        android:showAsAction="always"
-        android:title="@string/action_create">
-    </item>
+        android:showAsAction="ifRoom"
+        android:title="@string/action_create"/>
+    <item
+        android:id="@+id/action_delete"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:showAsAction="ifRoom"
+        android:title="@string/action_delete"/>
 
 </menu>
