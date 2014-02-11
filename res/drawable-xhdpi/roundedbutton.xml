@@ -6,6 +6,8 @@ android:shape="oval">
     <stroke 
         android:width="2dp" 
         android:color="#776da8" />
+    <corners
+        android:radius="150dp"/>
     <padding 
         android:left="1dp" 
         android:top="1dp" 

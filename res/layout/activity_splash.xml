@@ -51,7 +51,7 @@
             <ImageView android:id="@+id/imageview_splash4" 
 	            android:layout_width="match_parent" 
 	            android:layout_height="match_parent" 
-	            android:background="@drawable/splash_kowloon" />
+	            android:background="@drawable/splash_bridge" />
         </LinearLayout>
         <LinearLayout 
             android:layout_width="match_parent"

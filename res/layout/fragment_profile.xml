@@ -6,7 +6,6 @@
     android:weightSum="10"
     android:background="@drawable/profilefragmentcolor"
      >
-
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="0dp"
@@ -21,10 +20,11 @@
             android:layout_height="150dp"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
-            android:src="@drawable/profile_background" />
+            android:background="@drawable/profile_background" />
+
 
         <ImageView
-            android:id="@+id/profile_Pic_Button"
+            android:id="@+id/profile_Pic_Frame"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_alignParentBottom="true"
@@ -104,42 +104,119 @@
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/profile_Pic_Button"
-            android:layout_toRightOf="@+id/profile_Pic_Button"
+            android:layout_marginBottom="10dp"
+            android:layout_alignBottom="@+id/profile_Pic_Frame"
+            android:layout_toRightOf="@+id/profile_Pic_Frame"
             android:text="Firecamp Habibi"
             android:textSize="20dp" />
 
     </RelativeLayout>
 
-<RelativeLayout 
+<RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    android:layout_weight="5"
-    >
-                
-    <EditText
-                        android:id="@+id/whatsup"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="6dp"
-                        android:layout_marginLeft="12dp"
-                        android:layout_marginRight="12dp"
-                        android:layout_marginTop="12dp"
-                        android:background="@drawable/rectangularbox"
-                        android:textSize="20dp"
-                        android:hint="what&apos;s up?"
-                        android:inputType="textMultiLine" />
-    
+    android:layout_weight="5" >
 
-<com.facebook.widget.LoginButton
-    android:id="@+id/login_button"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:layout_marginBottom="17dp" />
+    <EditText
+        android:id="@+id/whatsup"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/rectangularbox"
+        android:hint="what&apos;s up?"
+        android:inputType="textMultiLine"
+        android:textSize="20dp" />
+
+    <com.facebook.widget.LoginButton
+        android:id="@+id/login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="17dp" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_above="@+id/login_button"
+        android:layout_marginBottom="5dp"
+        android:layout_alignParentLeft="true"
+        android:orientation="horizontal"
+        android:weightSum="4" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:id="@+id/friend1"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/roundedbutton"
+                android:scaleType="centerCrop" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:id="@+id/friend2"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/roundedbutton"
+                android:scaleType="centerCrop" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:id="@+id/friend3"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/roundedbutton"
+                android:scaleType="centerCrop" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" >
+
+            <ImageView
+                android:id="@+id/friend4"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/roundedbutton"
+                android:scaleType="centerCrop" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/linearLayout1"
+        android:layout_alignLeft="@+id/whatsup"
+        android:text="Mutual friends" />
 
 </RelativeLayout>
-    
 
 </LinearLayout>

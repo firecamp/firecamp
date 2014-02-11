@@ -5,12 +5,12 @@
 android:angle="270"
 android:centerX="35%"
 android:startColor="#ffffff"
-android:endColor="#d8d8d8"
+android:endColor="#dadada"
 android:type="linear"
 />
 
     <corners
-       android:radius="8dp" >
+       android:radius="10dp" >
        </corners>
 
 </shape>
