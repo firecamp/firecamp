@@ -3,6 +3,7 @@
     <string name="app_name">FireCamp</string>
     <string name="imageview_splash">Splash Screen</string>
     <string name="action_settings">Settings</string>
+    <string name="action_log_out">Log out</string>
     <string name="activity_settings">Settings</string>
     <string name="fragment_events">Events</string>
     <string name="fragment_map">Map</string>
@@ -30,6 +31,7 @@
 
     <!-- msg_ : general informational messages -->
     <string name="msg_no_events">There are no events.</string>
+    <string name="msg_no_friends">You have no friends.</string>
     <string name="msg_not_logged_in">You are not logged in. Please sign in with your Facebook account to access this feature.</string>
 
 </resources>
