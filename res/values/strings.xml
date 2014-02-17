@@ -8,7 +8,9 @@
     <string name="fragment_map">Map</string>
     <string name="fragment_people">People</string>
     <string name="fragment_profile">Profile</string>
-    <string name="app_id">660451867335150</string>
+
+    <!-- Facebook App ID -->
+    <string name="app_id">527188690734992</string>
     <string name="action_search">Search</string>
     <string name="tab_map">Map</string>
     <string name="tab_people">People</string>
@@ -18,7 +20,6 @@
     <string name="action_create">Create</string>
     <string name="action_delete">Delete</string>
     <string name="hello">Hello World, Todo!</string>
-    <string name="no_todos">Currently there are no events.</string>
     <string name="menu_insert">Add Item</string>
     <string name="menu_delete">Delete Todo</string>
     <string name="todo_summary">Summary</string>
@@ -27,11 +28,8 @@
     <string name="todo_edit_description">Description</string>
     <string name="todo_edit_confirm">Confirm</string>
 
-    <string-array name="priorities">
-        <item>Urgent</item>
-        <item>Reminder</item>
-    </string-array>
-        <!-- msg_ : general informational messages -->
+    <!-- msg_ : general informational messages -->
     <string name="msg_no_events">There are no events.</string>
+    <string name="msg_not_logged_in">You are not logged in. Please sign in with your Facebook account to access this feature.</string>
 
 </resources>
