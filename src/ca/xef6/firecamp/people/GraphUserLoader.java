@@ -5,7 +5,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
-import android.util.Log;
 
 import com.facebook.Request;
 import com.facebook.Response;
@@ -14,13 +13,10 @@ import com.facebook.model.GraphUser;
 
 public class GraphUserLoader extends AsyncTaskLoader<List<GraphUser>> {
 
-    private Session         session;
     private List<GraphUser> users;
 
     public GraphUserLoader(Context context) {
         super(context);
-        Log.w("GraphUserLoader", "CONSTRUCTOR");
-        session = Session.getActiveSession();
     }
 
     @Override
@@ -33,6 +29,7 @@ public class GraphUserLoader extends AsyncTaskLoader<List<GraphUser>> {
     @Override
     public List<GraphUser> loadInBackground() {
         final List<GraphUser> usersTT = new ArrayList<GraphUser>();
+        Session session = Session.getActiveSession();
         if (session == null || !session.isOpened()) {
             return usersTT;
         }
