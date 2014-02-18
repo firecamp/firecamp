@@ -31,6 +31,7 @@ public class GraphUserLoader extends AsyncTaskLoader<List<GraphUser>> {
         final List<GraphUser> usersTT = new ArrayList<GraphUser>();
         Session session = Session.getActiveSession();
         if (session == null || !session.isOpened()) {
+            users = null;
             return usersTT;
         }
         Request request = Request.newMyFriendsRequest(session, new Request.GraphUserListCallback() {
