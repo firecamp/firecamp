@@ -1,8 +1,12 @@
 package ca.xef6.firecamp.people;
 
+import java.util.List;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +15,11 @@ import ca.xef6.firecamp.R;
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
+import com.facebook.model.GraphUser;
 
-public class PeopleFragment extends Fragment {
+public class PeopleFragment extends ListFragment implements //
+        LoaderManager.LoaderCallbacks<List<GraphUser>> //
+{
 
     private View              view;
     private View              loginLayout;
@@ -21,6 +28,16 @@ public class PeopleFragment extends Fragment {
     private UiLifecycleHelper uiLifecycleHelper;
 
     private Session           session;
+
+    private GraphUserAdapter  adapter;
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        adapter = new GraphUserAdapter(getActivity());
+        setListAdapter(adapter);
+        getLoaderManager().initLoader(0, null, this);
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -40,6 +57,7 @@ public class PeopleFragment extends Fragment {
 
         });
         uiLifecycleHelper.onCreate(savedInstanceState);
+        session = Session.getActiveSession();
     }
 
     @Override
@@ -94,6 +112,25 @@ public class PeopleFragment extends Fragment {
             loginLayout.setVisibility(View.VISIBLE);
             peopleListLayout.setVisibility(View.GONE);
         }
+    }
+
+    /*------------------------------------------------------------------------*
+     * LoaderManager.LoaderCallbacks<GraphUser> methods
+     *------------------------------------------------------------------------*/
+
+    @Override
+    public Loader<List<GraphUser>> onCreateLoader(int id, Bundle args) {
+        return new GraphUserLoader(getActivity());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<GraphUser>> loader, List<GraphUser> data) {
+        adapter.setData(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<GraphUser>> loader) {
+        adapter.setData(null);
     }
 
 }

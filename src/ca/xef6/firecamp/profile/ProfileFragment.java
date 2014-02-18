@@ -24,6 +24,10 @@ public class ProfileFragment extends Fragment {
     ProfilePictureView        profilePictureView;
     TextView                  userNameView;
 
+    private View              loginLayout;
+    private View              profileLayout;
+    private Session           session;
+
     private UiLifecycleHelper uiLifecycleHelper;
 
     @Override
@@ -36,6 +40,9 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         profilePictureView = (ProfilePictureView) view.findViewById(R.id.profile_picture_view);
         userNameView = (TextView) view.findViewById(R.id.user_name_view);
+        loginLayout = view.findViewById(R.id.login_layout);
+        profileLayout = view.findViewById(R.id.profile_layout);
+        updateView();
         return view;
     }
 
@@ -57,6 +64,7 @@ public class ProfileFragment extends Fragment {
 
         });
         uiLifecycleHelper.onCreate(savedInstanceState);
+        session = Session.getActiveSession();
     }
 
     @Override
@@ -85,6 +93,8 @@ public class ProfileFragment extends Fragment {
     }
 
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+        this.session = session;
+        updateView();
         setUserData(session);
     }
 
@@ -111,6 +121,16 @@ public class ProfileFragment extends Fragment {
         });
         request.executeAsync();
 
+    }
+
+    private void updateView() {
+        if (session != null && session.isOpened()) {
+            profileLayout.setVisibility(View.VISIBLE);
+            loginLayout.setVisibility(View.GONE);
+        } else {
+            loginLayout.setVisibility(View.VISIBLE);
+            profileLayout.setVisibility(View.GONE);
+        }
     }
 
 }

@@ -1,0 +1,46 @@
+package ca.xef6.firecamp.people;
+
+import java.util.List;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import ca.xef6.firecamp.R;
+
+import com.facebook.model.GraphUser;
+import com.facebook.widget.ProfilePictureView;
+
+public class GraphUserAdapter extends ArrayAdapter<GraphUser> {
+
+    private LayoutInflater inflater;
+
+    public GraphUserAdapter(Context context) {
+        super(context, android.R.layout.simple_list_item_2); // FIXME: Why this layout here?
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View view;
+        if (convertView == null) {
+            view = inflater.inflate(R.layout.people_row, parent, false);
+        } else {
+            view = convertView;
+        }
+        GraphUser user = getItem(position);
+        // Fill the view with user data:
+        ((ProfilePictureView) view.findViewById(R.id.profile_picture_view)).setProfileId(user.getId());
+
+        return view;
+    }
+
+    public void setData(List<GraphUser> data) {
+        clear();
+        if (data != null) {
+            addAll(data);
+        }
+    }
+
+}
