@@ -33,6 +33,9 @@ public class GraphUserLoader extends AsyncTaskLoader<List<GraphUser>> {
     @Override
     public List<GraphUser> loadInBackground() {
         final List<GraphUser> usersTT = new ArrayList<GraphUser>();
+        if (session == null || !session.isOpened()) {
+            return usersTT;
+        }
         Request request = Request.newMyFriendsRequest(session, new Request.GraphUserListCallback() {
 
             @Override

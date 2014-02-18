@@ -32,10 +32,11 @@ public class GraphUserAdapter extends ArrayAdapter<GraphUser> {
         }
         GraphUser user = getItem(position);
         // Fill the view with user data:
-        ((ProfilePictureView) view.findViewById(R.id.profile_picture_view)).setProfileId(user.getId());
-        ((TextView) view.findViewById(R.id.id1)).setText(user.getName());
-        //((TextView) view.findViewById(R.id.status1)).setText(user.getLocation().getCity());
-
+        if (user != null) {
+            ((ProfilePictureView) view.findViewById(R.id.profile_picture_view)).setProfileId(user.getId());
+            ((TextView) view.findViewById(R.id.id1)).setText(user.getName());
+            //((TextView) view.findViewById(R.id.status1)).setText(user.getLocation().getCity());
+        }
         return view;
     }
 
